@@ -19,6 +19,7 @@ function handleSubmit(event) {
     // checkForName(URL)
 
     console.log("::: Form Submitted :::")
+    alert('test')
     fetch(`/summary?url=${URL}`)
     .then(res => res.json())
     .then(function(res) {
