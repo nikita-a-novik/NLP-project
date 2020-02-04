@@ -1,5 +1,7 @@
 # Info
 
+https://nlp-webpack-project.herokuapp.com/
+
 This is a project that summarizes articles.
 You have to provide a URL to the article that you want to summarize and hit submit.
 The app will spit out several sentences that best summarize the article.
