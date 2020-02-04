@@ -30,4 +30,4 @@ function handleSubmit(event) {
     })
 }
 
-export { handleSubmit }
+export { handleSubmit, formatResponse }
