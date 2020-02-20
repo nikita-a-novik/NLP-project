@@ -1,6 +1,10 @@
 var path = require('path')
 const express = require('express')
-const mockAPIResponse = require('./mockAPI.js')
+const { 
+    getURL,
+    getSummary,
+    unpackSummary
+} = require('./utils')
 
 var AYLIENTextAPI = require('aylien_textapi');
 var textapi = new AYLIENTextAPI({
@@ -12,8 +16,6 @@ const app = express()
 
 app.use(express.static('dist'))
 
-console.log(__dirname)
-
 app.get('/', function (req, res) {
     console.log(path.join(__dirname, './dist/index.html'))
     res.sendFile(path.join(__dirname, './dist/index.html'))
@@ -24,19 +26,10 @@ app.listen(process.env.PORT || 8080, function () {
     console.log('Example app listening on port 8080!')
 })
 
-function getURL(req) {
-    let URL = req.query.url;
-    return URL;
-};
-
-function getSummary(URL, cb){
-  textapi.summarize({ url: URL }, cb)
-}; 
-
 app.get('/summary', function (req, res) {
     const URL = getURL(req)
-    getSummary(URL, (...summary) => {
-        console.warn(summary)
-        res.send(summary[1].sentences)
-    })
+    getSummary(URL, (...r) => {
+        console.warn(r);
+        res.send(JSON.stringify(unpackSummary(...r)))
+    }, textapi)
 })

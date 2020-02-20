@@ -1,3 +1,5 @@
+import { checkForName } from './nameChecker'
+
 function formatResponse(response) {
     let result = '<ul>'
     for (let index = 0; index < response.length; index++) {
@@ -14,9 +16,10 @@ function handleSubmit(event) {
     
     // check what text was put into the form field
     let URLclean = document.getElementById('name').value
-    let URL = encodeURIComponent(URLclean);
+    
+    if (!checkForName(URLclean)) return
 
-    // checkForName(URL)
+    let URL = encodeURIComponent(URLclean)
 
     console.log("::: Form Submitted :::")
     

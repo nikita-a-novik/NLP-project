@@ -1,16 +1,18 @@
-function checkForName(inputText) {
-    console.log("::: Running checkForName :::", inputText);
-    let names = [
-        "Picard",
-        "Janeway",
-        "Kirk",
-        "Archer",
-        "Georgiou"
-    ]
-
-    if(names.includes(inputText)) {
-        alert("Welcome, Captain!")
+const isUrlCorrect = (url) => {
+    try {
+        new URL(url);
+        return true;
+    } catch (e) {
+        return false;
     }
 }
+function checkForName(inputText) {
+    console.log("::: Running checkForName :::", inputText);
+    if (!isUrlCorrect(inputText)) {
+        alert("Please provide a correct URL in a format [protocol]://[uri]")
+        return false;
+    }
+    return true;
+}
 
-export { checkForName }
+export { checkForName, isUrlCorrect }
